@@ -7,21 +7,21 @@
    <div class="row justify-content-center">
        <div class="col-md-8">
 
-       <legend style="color: green; font-weight: bold;">LARAVEL CRUD
+       <legend style="color: green; font-weight: bold;">LARAVEL CRUD - Clientes
            <a href="{{ route('cliente.listar') }}" style="float: right; display: block;color: white; background-color: green; padding: 1px 5px 1px 5px; text-decoration: none; border-radius: 5px; font-size: 17px;"> CLIENTE LISTA</a>
         </legend>
        </div>
 
        <div class="form-group">
           <label for="Nome"></label>
-          <input type="text" class="form-control" name="nome" value="{{ cliente->nome}}"
-          <font style="color: red">{{ errors->has('nome') ? $errors->first('nome') : ''}}</font>
+          <input type="text" class="form-control" name="nome" value="{{ $cliente->nome}}"
+          <font style="color: red">{{ $errors->has('nome') ? $errors->first('nome') : ''}}</font>
        </div>
 
        <div class="form-group">
           <label for="Email"></label>
-          <input type="text" class="form-control" name="email" value="{{ cliente->email}}"
-          <font style="color: red">{{ errors->has('email') ? $errors->first('email') : ''}}</font>
+          <input type="text" class="form-control" name="email" value="{{ $cliente->email}}"
+          <font style="color: red">{{ $errors->has('email') ? $errors->first('email') : ''}}</font>
        </div>
 
        <div class="form-group" style="margin-top: 24px;">

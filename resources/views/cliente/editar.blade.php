@@ -14,21 +14,22 @@
           <a href="{{ route('cliente.listar') }}" style="float: right; display:block; color: white; background-color: green; padding: 1px 5px 1px 5px; text-decoration:none; border-radius: 5px; font-size:17px;">Cliente Lista</a></a>
        </legend>
 
-       <form action="{{ route('cliente.salvar')}}" method="post">
+       <form action="{{ route('cliente.update', $cliente->slug)}}" method="post">
        @csrf
+        @method('patch')
        <div class="form-group">
           <label for="">Nome</label>
-          <input type="text" class="form-control" name="nome" value="{{ old('nome') }}" placeholder="Digite seu nome">
+          <input type="text" class="form-control" name="nome" value="{{ $cliente->nome}}">
           <font style="color: red">{{$errors->has('nome') ? $errors->first('nome') : '' }}</font>
        </div>
        <div class="form-group">
           <label for="">Email</label>
-          <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Digite seu email">
+          <input type="text" class="form-control" name="email" value="{{ $cliente->email }}">
           <font style="color: red">{{$errors->has('email') ? $errors->first('email') : '' }}</font>
        </div>
 
        <div class="form-group" style="margin-top: 24px;">
-          <input type="submit" class="btn btn-primary" value="Salvar">
+          <input type="submit" class="btn btn-primary" value="Atualizar">
        </div>
        </form>
     </div>
