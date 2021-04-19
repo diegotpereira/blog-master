@@ -7,7 +7,7 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    //
+    // add_customer_form
     public function add_cliente_form()
     {
         if (\View::exists('cliente.criar')) {
@@ -17,6 +17,7 @@ class ClienteController extends Controller
         }
     }
 
+    // submit_customer_data
     public function enviar_cliente_dado(Request $request)
     {
         $rules = [
@@ -25,25 +26,33 @@ class ClienteController extends Controller
         ];
 
         $mensagemErros = [
-            'required' => 'Por Favor seu :atribua primeiro.'
+            'required' => 'Enter your :attribute first.'
         ];
+
+        $this->validate($request, $rules, $mensagemErros);
 
         Cliente::create([
             'nome' => $request->nome,
             'slug' => \Str::slug($request->nome),
             'email' => strtolower($request->email)
         ]);
-        $this->mensagem('mensagem', 'Clinte cadastrado com sucesso!.');
+        $this->mensagem('mensagem', 'Cliente cadastrado com sucesso!.');
 
         return redirect()->back();
     }
+    // fetch_all_customer
     public function buscar_todos_clientes()
     {
         $clientes =Cliente::toBase()->get();
 
+        return view('cliente.index', compact('clientes'));
+    }
+    //edit_customer_form
+    public function editar_cliente_form(Cliente $cliente)
+    {
         return view('cliente.editar', compact('cliente'));
     }
-
+    // edit_customer_form_submit
     public function editar_cliente_form_enviar(Request $request, Cliente $cliente)
     {
         $rules = [
@@ -51,7 +60,7 @@ class ClienteController extends Controller
             'email' => 'required|email|unique:clientes'
         ];
         $mensagemErros = [
-            'required' => 'Entre seu :atribua primeiro.'
+            'required' => 'Enter your :attribute first.'
         ];
 
         $this->validate($request, $rules, $mensagemErros);
@@ -65,13 +74,16 @@ class ClienteController extends Controller
 
         return redirect()->back();
     }
+    // view_single_customer
     public function mostrar_unico_cliente(Cliente $cliente)
     {
         return view('cliente.mostrar', compact('cliente'));
     }
+
+    // delete_customer
     public function deletar_cliente(Cliente $cliente)
     {
-        $cliente->deletar();
+        $cliente->delete();
         $this->mensagem('mensagem', 'Cliente deletado com sucesso!.');
 
         return redirect()->back();
