@@ -57,7 +57,7 @@ class ClienteController extends Controller
     {
         $rules = [
             'nome' => 'required|min:6',
-            'email' => 'required|email|unique:clientes'
+            'email' => 'required|email'
         ];
         $mensagemErros = [
             'required' => 'Enter your :attribute first.'
