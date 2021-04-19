@@ -26,3 +26,5 @@ Route::get('/cliente/{cliente}', 'ClienteController@mostrar_unico_cliente')->nam
 Route::delete('/cliente/{cliente}', 'ClienteController@deletar_cliente')->name('cliente.delete');
 
 
+
+
